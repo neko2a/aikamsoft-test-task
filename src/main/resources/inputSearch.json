@@ -1,0 +1,18 @@
+{
+  "criteria": [
+    {
+      "lastName": "Тутович"
+    },
+    {
+      "productName": "Минеральная вода",
+      "minTimes": 2
+    },
+    {
+      "minExpenses": 100,
+      "maxExpenses": 10000
+    },
+    {
+      "badCustomers": 2
+    }
+  ]
+}

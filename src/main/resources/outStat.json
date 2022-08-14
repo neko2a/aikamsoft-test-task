@@ -1,0 +1,20 @@
+{
+  "type" : "STAT",
+  "totalDays" : 5,
+  "customers" : [ {
+    "name" : "Тутович Евген",
+    "purchases" : [ {
+      "name" : "Минеральная вода",
+      "expenses" : 26994
+    }, {
+      "name" : "Стол",
+      "expenses" : 1729
+    }, {
+      "name" : "Бутерброд",
+      "expenses" : 240
+    } ],
+    "totalExpenses" : 28963
+  } ],
+  "totalExpenses" : 28963,
+  "avgExpenses" : 3218.1111111111113
+}
