@@ -1,7 +1,9 @@
 package repository;
 
 import lombok.AllArgsConstructor;
+import model.Error;
 import model.search.Customer;
+import org.tinylog.Logger;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -70,7 +72,7 @@ public class CustomerRepo {
                         resultSet.getString("first_name")));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.error(new Error(e.getMessage()));
         }
 
         return customers;

@@ -4,13 +4,14 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.AllArgsConstructor;
-import model.ResultType;
+import model.Error;
 import model.search.Results;
 import model.search.Search;
 import model.search.criteria.BadCustomerCriteria;
 import model.search.criteria.ExpensesRangeCriteria;
 import model.search.criteria.LastNameCriteria;
 import model.search.criteria.ProductNameAndMinTimesCriteria;
+import org.tinylog.Logger;
 import repository.CustomerRepo;
 
 import java.io.FileReader;
@@ -32,7 +33,7 @@ public class SearchService {
             CustomerRepo searchRepo = new CustomerRepo(connection);
             Map<?, ?> map = mapper.readValue(input, Map.class);
             ArrayList<Results> results = new ArrayList<>();
-            Search search = new Search(ResultType.SEARCH, results);
+            Search search = new Search(results);
 
             for (Map.Entry<?, ?> entry : map.entrySet()) {
                 ArrayList<LinkedHashMap> list = (ArrayList) entry.getValue();
@@ -67,7 +68,7 @@ public class SearchService {
             writer.writeValue(output, search);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.error(new Error(e.getMessage()));
         }
     }
 }

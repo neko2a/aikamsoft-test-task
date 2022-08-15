@@ -4,8 +4,10 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.AllArgsConstructor;
+import model.Error;
 import model.stat.Stat;
 import model.stat.StatRequest;
+import org.tinylog.Logger;
 import repository.StatRepo;
 
 import java.io.FileReader;
@@ -26,7 +28,7 @@ public class StatService {
             Stat statResult = statRepo.findPurchaseInDateRange(dates.getStartDate(), dates.getEndDate());
             writer.writeValue(output, statResult);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.error(new Error(e.getMessage()));
         }
     }
 }

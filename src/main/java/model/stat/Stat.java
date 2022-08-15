@@ -11,10 +11,10 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @JsonAutoDetect
 public class Stat {
-    private ResultType type;
-    private int totalDays;
-    private ArrayList<Customer> customers;
-    private int totalExpenses;
-    private double avgExpenses;
+    private final String type = ResultType.STAT.getType();
+    private final int totalDays;
+    private final ArrayList<Customer> customers;
+    private final int totalExpenses;
+    private final double avgExpenses;
 
 }

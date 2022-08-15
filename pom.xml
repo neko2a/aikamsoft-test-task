@@ -15,6 +15,7 @@
         <lombok.version>1.18.24</lombok.version>
         <jackson.version>2.13.3</jackson.version>
         <json-simple.version>1.1.1</json-simple.version>
+        <tinylog.version>2.5.0-M1.1</tinylog.version>
 
     </properties>
 
@@ -41,6 +42,11 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.tinylog</groupId>
+            <artifactId>tinylog-impl</artifactId>
+            <version>${tinylog.version}</version>
         </dependency>
 
     </dependencies>

@@ -1,10 +1,11 @@
 package repository;
 
 import lombok.AllArgsConstructor;
-import model.ResultType;
+import model.Error;
 import model.stat.Customer;
 import model.stat.Purchase;
 import model.stat.Stat;
+import org.tinylog.Logger;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -35,7 +36,7 @@ public class StatRepo {
         ArrayList<Customer> customers = new ArrayList<>();
         int workingDays = findWorkingDays(startDate, endDate);
         if (workingDays == 0) {
-            return new Stat(ResultType.STAT, 0, customers, 0, 0);
+            return new Stat(0, customers, 0, 0);
         }
 
         try {
@@ -62,7 +63,7 @@ public class StatRepo {
             }
             // Пустой возврат от БД
             if (name.equals("")) {
-                return new Stat(ResultType.STAT, 0, customers, 0, 0);
+                return new Stat(0, customers, 0, 0);
             }
 
 
@@ -74,12 +75,12 @@ public class StatRepo {
                 customers.add(new Customer(key, map.get(key), customerTotalExpenses));
             }
             customers.sort(Comparator.comparingInt(Customer::getTotalExpenses).reversed());
-            return new Stat(ResultType.STAT, workingDays, customers,
+            return new Stat(workingDays, customers,
                     findTotalExpensesInDateRange(startDate, endDate), findAverageExpensesInDateRange(startDate, endDate));
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.error(new Error(e.getMessage()));
         }
-        return new Stat(ResultType.STAT, 0, customers, 0, 0);
+        return new Stat(0, customers, 0, 0);
     }
 
     private int findExpensesByCustomerInDateRange(String lastName, String firstName, String startDate, String endDate) {
@@ -97,7 +98,7 @@ public class StatRepo {
             resultSet.next();
             return Integer.parseInt(resultSet.getString(1));
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.error(new Error(e.getMessage()));
         }
         return 0;
     }
@@ -114,7 +115,7 @@ public class StatRepo {
             resultSet.next();
             return Integer.parseInt(resultSet.getString(1));
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.error(new Error(e.getMessage()));
         }
         return 0;
     }
@@ -131,7 +132,7 @@ public class StatRepo {
             resultSet.next();
             return Double.parseDouble(resultSet.getString(1));
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.error(new Error(e.getMessage()));
         }
         return 0;
     }

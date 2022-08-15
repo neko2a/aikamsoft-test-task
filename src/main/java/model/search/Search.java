@@ -9,6 +9,6 @@ import java.util.ArrayList;
 @Data
 @AllArgsConstructor
 public class Search {
-    private final ResultType type;
+    private final String type = ResultType.SEARCH.getType();
     private final ArrayList<Results> results;
 }
