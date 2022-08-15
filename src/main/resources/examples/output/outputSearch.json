@@ -1,5 +1,5 @@
 {
-  "type" : "SEARCH",
+  "type" : "search",
   "results" : [ {
     "criteria" : {
       "lastName" : "Тутович"
