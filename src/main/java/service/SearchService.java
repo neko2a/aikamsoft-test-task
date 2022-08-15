@@ -17,6 +17,7 @@ import repository.CustomerRepo;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -39,12 +40,14 @@ public class SearchService {
                 ArrayList<LinkedHashMap> list = (ArrayList) entry.getValue();
                 for (LinkedHashMap element : list) {
                     if (element.containsKey("lastName")) {
-                        String lastName = (String) element.get("lastName");
+                        String lastName = new String(((String) element.get("lastName")).getBytes(),
+                                StandardCharsets.UTF_8);
 
                         results.add(new Results(new LastNameCriteria(lastName),
                                 searchRepo.findCustomersByLastName(lastName)));
                     } else if (element.containsKey("productName") && element.containsKey("minTimes")) {
-                        String productName = (String) element.get("productName");
+                        String productName = new String(((String) element.get("productName")).getBytes(),
+                                StandardCharsets.UTF_8);
                         int minTimes = (int) element.get("minTimes");
 
                         results.add(new Results(new ProductNameAndMinTimesCriteria(productName, minTimes),

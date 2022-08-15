@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class Error extends java.lang.Error {
+public class Error {
     private final String type = ResultType.ERROR.getType();
     private final String message;
 
